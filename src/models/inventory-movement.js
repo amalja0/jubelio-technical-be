@@ -1,15 +1,15 @@
 import Sequelize from "sequelize";
-import {initAttributes, initOptions} from "./models.meta";
+import {initAttributes, initOptions} from "./models.meta.js";
 import {
   INVENTORY_MOVEMENT_BELONGS_TO_PRODUCT_ALIAS,
   INVENTORY_MOVEMENT_BELONGS_TO_PRODUCT_FK,
   INVENTORY_MOVEMENT_BELONGS_TO_SALES_ALIAS,
   INVENTORY_MOVEMENT_BELONGS_TO_SALES_FK,
-  INVENTORY_MOVEMENT_BELONGS_TO_SALES_TARGET_KEY,
+  INVENTORY_MOVEMENT_BELONGS_TO_SALES_TARGET_KEY, INVENTORY_MOVEMENT_MODEL_NAME,
   INVENTORY_MOVEMENT_TABLE_NAME,
   PRODUCT_MODEL_NAME,
   SALES_MODEL_NAME
-} from "./models.constants";
+} from "./models.constants.js";
 
 const schemaAttributes = initAttributes({
   id: {
@@ -37,7 +37,7 @@ const schemaOptions = initOptions({
 
 const inventoryMovementsModel = (sequelize) => {
   const inventoryMovements = sequelize.define(
-    INVENTORY_MOVEMENT_TABLE_NAME,
+    INVENTORY_MOVEMENT_MODEL_NAME,
     schemaAttributes,
     schemaOptions
   )

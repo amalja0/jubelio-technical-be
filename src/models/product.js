@@ -1,5 +1,5 @@
 import Sequelize from "sequelize";
-import {initAttributes, initOptions} from "./models.meta";
+import {initAttributes, initOptions} from "./models.meta.js";
 import {
   CATEGORY_MODEL_NAME, INVENTORY_MOVEMENT_MODEL_NAME,
   PRODUCT_BELONGS_TO_CATEGORY_ALIAS,
@@ -12,7 +12,7 @@ import {
   PRODUCT_TABLE_NAME,
   SALES_MODEL_NAME,
   SUB_CATEGORY_MODEL_NAME
-} from "./models.constants";
+} from "./models.constants.js";
 
 const schemaAttributes = initAttributes({
   id: {
@@ -21,7 +21,7 @@ const schemaAttributes = initAttributes({
     primaryKey: true
   },
   name: {
-    type: Sequelize.DATE,
+    type: Sequelize.STRING,
     unique: true,
   },
   manufacturer: {

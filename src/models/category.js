@@ -1,5 +1,5 @@
 import Sequelize from "sequelize";
-import {initAttributes, initOptions} from "./models.meta";
+import {initAttributes, initOptions} from "./models.meta.js";
 import {
   CATEGORY_HAS_MANY_SUB_CATEGORY_ALIAS,
   CATEGORY_HAS_MANY_SUB_CATEGORY_FK,
@@ -9,7 +9,7 @@ import {
   CATEGORY_TABLE_NAME,
   PRODUCT_MODEL_NAME,
   SUB_CATEGORY_MODEL_NAME
-} from "./models.constants";
+} from "./models.constants.js";
 
 const schemaAttributes = initAttributes({
   id: {
@@ -27,7 +27,7 @@ const schemaOptions = initOptions({
   tableName: CATEGORY_TABLE_NAME,
 })
 
-const categoriesModel = (sequelize) => {
+const categoriesModel = (sequelize, DataTypes) => {
   const categories = sequelize.define(
     CATEGORY_MODEL_NAME,
     schemaAttributes,

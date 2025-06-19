@@ -2,8 +2,8 @@ import Sequelize from "sequelize";
 
 export const initOptions = (additionalOptions) => {
   return {
-    timestamps: true,
     ...additionalOptions,
+    timestamps: true,
     paranoid: true,
     underscored: true,
     createdAt: 'created_at',

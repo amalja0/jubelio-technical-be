@@ -1,26 +1,19 @@
-import {Sequelize} from "sequelize";
-import {DATABASE, dialect, HOST, PASSWORD, pool, PORT, USER} from "../../config/db.config";
+import { fileURLToPath } from 'url';
+import path, { dirname } from 'path';
+import sequelize from '../../config/sequelize.js';
 
-const sequelize = new Sequelize(
-  DATABASE,
-  USER,
-  PASSWORD,
-  {
-    dialect: dialect,
-    host: HOST,
-    port: PORT,
-    pool: {
-      max: pool.max,
-      min: pool.min,
-      acquire:pool.acquire,
-      idle: pool.idle,
-    }
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+let db = null
+
+export async function initializeDB() {
+  if (!db) {
+    db = await sequelize.initSequelize(Object.assign({
+      modelDir: { dirname: __dirname, basename: path.basename(__filename) },
+    }, sequelize.db));
   }
-);
+  return db;
+}
 
-const db = {};
-db.Sequelize = Sequelize;
-db.sequelize = sequelize;
-
-
-module.exports = db;
+export default {};

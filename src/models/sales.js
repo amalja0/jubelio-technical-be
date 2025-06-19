@@ -1,5 +1,5 @@
 import Sequelize from "sequelize";
-import {initAttributes, initOptions} from "./models.meta";
+import {initAttributes, initOptions} from "./models.meta.js";
 import {
   INVENTORY_MOVEMENT_MODEL_NAME,
   LOCATION_MODEL_NAME,
@@ -16,7 +16,7 @@ import {
   SALES_MODEL_NAME,
   SALES_TABLE_NAME,
   SEGMENT_MODEL_NAME
-} from "./models.constants";
+} from "./models.constants.js";
 
 const schemaAttributes = initAttributes({
   id: {
@@ -61,6 +61,7 @@ const schemaAttributes = initAttributes({
   },
   order_id: {
     type: Sequelize.STRING,
+    unique: true
   },
   order_date: {
     type: Sequelize.DATE,

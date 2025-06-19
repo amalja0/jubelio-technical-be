@@ -1,0 +1,1 @@
+import './node_modules/sequelize-auto-migrations/bin/makemigration.js';

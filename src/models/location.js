@@ -1,12 +1,12 @@
 import Sequelize from "sequelize";
-import {initAttributes, initOptions} from "./models.meta";
+import {initAttributes, initOptions} from "./models.meta.js";
 import {
   LOCATION_HAS_MANY_SUB_SALES_ALIAS,
   LOCATION_HAS_MANY_SUB_SALES_FK,
   LOCATION_MODEL_NAME,
   LOCATION_TABLE_NAME,
   SALES_MODEL_NAME
-} from "./models.constants";
+} from "./models.constants.js";
 
 const schemaAttributes = initAttributes({
   id: {
@@ -14,8 +14,8 @@ const schemaAttributes = initAttributes({
     defaultValue: Sequelize.UUIDV4,
     primaryKey: true
   },
-  name: {
-    city: Sequelize.STRING,
+  city: {
+    type: Sequelize.STRING,
     unique: true,
   },
   state: {

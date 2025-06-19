@@ -1,0 +1,549 @@
+{
+    "tables": {
+        "categories": {
+            "tableName": "categories",
+            "schema": {
+                "id": {
+                    "defaultValue": {
+                        "internal": true,
+                        "value": "Sequelize.UUIDV4"
+                    },
+                    "primaryKey": true,
+                    "field": "id",
+                    "seqType": "Sequelize.UUID"
+                },
+                "name": {
+                    "unique": true,
+                    "field": "name",
+                    "seqType": "Sequelize.DATE"
+                },
+                "created_by": {
+                    "defaultValue": {
+                        "value": "SYSTEM"
+                    },
+                    "field": "created_by",
+                    "seqType": "Sequelize.STRING"
+                },
+                "updated_by": {
+                    "defaultValue": {
+                        "value": "SYSTEM"
+                    },
+                    "field": "updated_by",
+                    "seqType": "Sequelize.STRING"
+                },
+                "deleted_by": {
+                    "field": "deleted_by",
+                    "seqType": "Sequelize.STRING"
+                },
+                "created_at": {
+                    "allowNull": false,
+                    "field": "created_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updated_at": {
+                    "allowNull": false,
+                    "field": "updated_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "deleted_at": {
+                    "field": "deleted_at",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": []
+        },
+        "inventory_movement": {
+            "tableName": "inventory_movement",
+            "schema": {
+                "id": {
+                    "defaultValue": {
+                        "internal": true,
+                        "value": "Sequelize.UUIDV4"
+                    },
+                    "primaryKey": true,
+                    "field": "id",
+                    "allowNull": true,
+                    "references": {
+                        "model": "products",
+                        "key": "id"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.UUID"
+                },
+                "movement_date": {
+                    "field": "movement_date",
+                    "seqType": "Sequelize.DATE"
+                },
+                "quantity_change": {
+                    "field": "quantity_change",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "movement_type": {
+                    "field": "movement_type",
+                    "seqType": "Sequelize.STRING"
+                },
+                "current_stock": {
+                    "field": "current_stock",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "created_by": {
+                    "defaultValue": {
+                        "value": "SYSTEM"
+                    },
+                    "field": "created_by",
+                    "seqType": "Sequelize.STRING"
+                },
+                "updated_by": {
+                    "defaultValue": {
+                        "value": "SYSTEM"
+                    },
+                    "field": "updated_by",
+                    "seqType": "Sequelize.STRING"
+                },
+                "deleted_by": {
+                    "field": "deleted_by",
+                    "seqType": "Sequelize.STRING"
+                },
+                "created_at": {
+                    "allowNull": false,
+                    "field": "created_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updated_at": {
+                    "allowNull": false,
+                    "field": "updated_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "deleted_at": {
+                    "field": "deleted_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "product_id": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "products",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "product_id",
+                    "seqType": "Sequelize.UUID"
+                },
+                "sales_Id": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "sales",
+                        "key": "order_id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "sales__id",
+                    "seqType": "Sequelize.STRING"
+                }
+            },
+            "indexes": []
+        },
+        "locations": {
+            "tableName": "locations",
+            "schema": {
+                "id": {
+                    "defaultValue": {
+                        "internal": true,
+                        "value": "Sequelize.UUIDV4"
+                    },
+                    "primaryKey": true,
+                    "field": "id",
+                    "seqType": "Sequelize.UUID"
+                },
+                "city": {
+                    "unique": true,
+                    "field": "city",
+                    "seqType": "Sequelize.STRING"
+                },
+                "state": {
+                    "field": "state",
+                    "seqType": "Sequelize.STRING"
+                },
+                "postal_code": {
+                    "field": "postal_code",
+                    "seqType": "Sequelize.STRING"
+                },
+                "region": {
+                    "field": "region",
+                    "seqType": "Sequelize.STRING"
+                },
+                "country": {
+                    "field": "country",
+                    "seqType": "Sequelize.STRING"
+                },
+                "created_by": {
+                    "defaultValue": {
+                        "value": "SYSTEM"
+                    },
+                    "field": "created_by",
+                    "seqType": "Sequelize.STRING"
+                },
+                "updated_by": {
+                    "defaultValue": {
+                        "value": "SYSTEM"
+                    },
+                    "field": "updated_by",
+                    "seqType": "Sequelize.STRING"
+                },
+                "deleted_by": {
+                    "field": "deleted_by",
+                    "seqType": "Sequelize.STRING"
+                },
+                "created_at": {
+                    "allowNull": false,
+                    "field": "created_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updated_at": {
+                    "allowNull": false,
+                    "field": "updated_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "deleted_at": {
+                    "field": "deleted_at",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": []
+        },
+        "products": {
+            "tableName": "products",
+            "schema": {
+                "id": {
+                    "defaultValue": {
+                        "internal": true,
+                        "value": "Sequelize.UUIDV4"
+                    },
+                    "primaryKey": true,
+                    "field": "id",
+                    "allowNull": true,
+                    "references": {
+                        "model": "categories",
+                        "key": "id"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.UUID"
+                },
+                "name": {
+                    "unique": true,
+                    "field": "name",
+                    "seqType": "Sequelize.STRING"
+                },
+                "manufacturer": {
+                    "field": "manufacturer",
+                    "seqType": "Sequelize.STRING"
+                },
+                "base_price": {
+                    "field": "base_price",
+                    "seqType": "Sequelize.FLOAT"
+                },
+                "created_by": {
+                    "defaultValue": {
+                        "value": "SYSTEM"
+                    },
+                    "field": "created_by",
+                    "seqType": "Sequelize.STRING"
+                },
+                "updated_by": {
+                    "defaultValue": {
+                        "value": "SYSTEM"
+                    },
+                    "field": "updated_by",
+                    "seqType": "Sequelize.STRING"
+                },
+                "deleted_by": {
+                    "field": "deleted_by",
+                    "seqType": "Sequelize.STRING"
+                },
+                "created_at": {
+                    "allowNull": false,
+                    "field": "created_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updated_at": {
+                    "allowNull": false,
+                    "field": "updated_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "deleted_at": {
+                    "field": "deleted_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "category_id": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "categories",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "category_id",
+                    "seqType": "Sequelize.UUID"
+                },
+                "sub_category_id": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "sub_categories",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "sub_category_id",
+                    "seqType": "Sequelize.UUID"
+                }
+            },
+            "indexes": []
+        },
+        "sales": {
+            "tableName": "sales",
+            "schema": {
+                "id": {
+                    "defaultValue": {
+                        "internal": true,
+                        "value": "Sequelize.UUIDV4"
+                    },
+                    "primaryKey": true,
+                    "field": "id",
+                    "allowNull": true,
+                    "references": {
+                        "model": "locations",
+                        "key": "id"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.UUID"
+                },
+                "ship_date": {
+                    "field": "ship_date",
+                    "seqType": "Sequelize.DATE"
+                },
+                "ship_mode": {
+                    "field": "ship_mode",
+                    "seqType": "Sequelize.STRING"
+                },
+                "customer_name": {
+                    "field": "customer_name",
+                    "seqType": "Sequelize.STRING"
+                },
+                "quantity": {
+                    "field": "quantity",
+                    "seqType": "Sequelize.SMALLINT"
+                },
+                "sales_amount": {
+                    "field": "sales_amount",
+                    "seqType": "Sequelize.FLOAT"
+                },
+                "discount": {
+                    "field": "discount",
+                    "seqType": "Sequelize.FLOAT"
+                },
+                "profit": {
+                    "field": "profit",
+                    "seqType": "Sequelize.FLOAT"
+                },
+                "profit_ratio": {
+                    "field": "profit_ratio",
+                    "seqType": "Sequelize.FLOAT"
+                },
+                "number_of_record": {
+                    "field": "number_of_record",
+                    "seqType": "Sequelize.SMALLINT"
+                },
+                "order_id": {
+                    "unique": true,
+                    "field": "order_id",
+                    "seqType": "Sequelize.STRING"
+                },
+                "order_date": {
+                    "field": "order_date",
+                    "seqType": "Sequelize.DATE"
+                },
+                "created_by": {
+                    "defaultValue": {
+                        "value": "SYSTEM"
+                    },
+                    "field": "created_by",
+                    "seqType": "Sequelize.STRING"
+                },
+                "updated_by": {
+                    "defaultValue": {
+                        "value": "SYSTEM"
+                    },
+                    "field": "updated_by",
+                    "seqType": "Sequelize.STRING"
+                },
+                "deleted_by": {
+                    "field": "deleted_by",
+                    "seqType": "Sequelize.STRING"
+                },
+                "created_at": {
+                    "allowNull": false,
+                    "field": "created_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updated_at": {
+                    "allowNull": false,
+                    "field": "updated_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "deleted_at": {
+                    "field": "deleted_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "product_id": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "products",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "product_id",
+                    "seqType": "Sequelize.UUID"
+                },
+                "location_id": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "locations",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "location_id",
+                    "seqType": "Sequelize.UUID"
+                },
+                "segment_id": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "segments",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "segment_id",
+                    "seqType": "Sequelize.UUID"
+                }
+            },
+            "indexes": []
+        },
+        "segments": {
+            "tableName": "segments",
+            "schema": {
+                "id": {
+                    "defaultValue": {
+                        "internal": true,
+                        "value": "Sequelize.UUIDV4"
+                    },
+                    "primaryKey": true,
+                    "field": "id",
+                    "seqType": "Sequelize.UUID"
+                },
+                "name": {
+                    "unique": true,
+                    "field": "name",
+                    "seqType": "Sequelize.DATE"
+                },
+                "created_by": {
+                    "defaultValue": {
+                        "value": "SYSTEM"
+                    },
+                    "field": "created_by",
+                    "seqType": "Sequelize.STRING"
+                },
+                "updated_by": {
+                    "defaultValue": {
+                        "value": "SYSTEM"
+                    },
+                    "field": "updated_by",
+                    "seqType": "Sequelize.STRING"
+                },
+                "deleted_by": {
+                    "field": "deleted_by",
+                    "seqType": "Sequelize.STRING"
+                },
+                "created_at": {
+                    "allowNull": false,
+                    "field": "created_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updated_at": {
+                    "allowNull": false,
+                    "field": "updated_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "deleted_at": {
+                    "field": "deleted_at",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": []
+        },
+        "sub_categories": {
+            "tableName": "sub_categories",
+            "schema": {
+                "id": {
+                    "defaultValue": {
+                        "internal": true,
+                        "value": "Sequelize.UUIDV4"
+                    },
+                    "primaryKey": true,
+                    "field": "id",
+                    "allowNull": true,
+                    "references": {
+                        "model": "categories",
+                        "key": "id"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.UUID"
+                },
+                "name": {
+                    "unique": true,
+                    "field": "name",
+                    "seqType": "Sequelize.DATE"
+                },
+                "created_by": {
+                    "defaultValue": {
+                        "value": "SYSTEM"
+                    },
+                    "field": "created_by",
+                    "seqType": "Sequelize.STRING"
+                },
+                "updated_by": {
+                    "defaultValue": {
+                        "value": "SYSTEM"
+                    },
+                    "field": "updated_by",
+                    "seqType": "Sequelize.STRING"
+                },
+                "deleted_by": {
+                    "field": "deleted_by",
+                    "seqType": "Sequelize.STRING"
+                },
+                "created_at": {
+                    "allowNull": false,
+                    "field": "created_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updated_at": {
+                    "allowNull": false,
+                    "field": "updated_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "deleted_at": {
+                    "field": "deleted_at",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": []
+        }
+    },
+    "revision": 1
+}

@@ -1,5 +1,5 @@
 import Sequelize from "sequelize";
-import {initAttributes, initOptions} from "./models.meta";
+import {initAttributes, initOptions} from "./models.meta.js";
 import {
   PRODUCT_MODEL_NAME,
   SUB_CATEGORY_BELONGS_TO_CATEGORY_ALIAS,
@@ -8,7 +8,7 @@ import {
   SUB_CATEGORY_HAS_MANY_SUB_PRODUCT_FK,
   SUB_CATEGORY_MODEL_NAME,
   SUB_CATEGORY_TABLE_NAME
-} from "./models.constants";
+} from "./models.constants.js";
 
 const schemaAttributes = initAttributes({
   id: {

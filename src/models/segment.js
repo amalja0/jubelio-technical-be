@@ -1,12 +1,12 @@
 import Sequelize from "sequelize";
-import {initAttributes, initOptions} from "./models.meta";
+import {initAttributes, initOptions} from "./models.meta.js";
 import {
   SALES_MODEL_NAME,
   SEGMENT_HAS_MANY_SUB_SALES_ALIAS,
   SEGMENT_HAS_MANY_SUB_SALES_FK,
   SEGMENT_MODEL_NAME,
   SEGMENT_TABLE_NAME
-} from "./models.constants";
+} from "./models.constants.js";
 
 const schemaAttributes = initAttributes({
   id: {
