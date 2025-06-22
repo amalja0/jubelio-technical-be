@@ -1,8 +1,8 @@
 import Sequelize from "sequelize";
 import {initAttributes, initOptions} from "./models.meta.js";
 import {
-  LOCATION_HAS_MANY_SUB_SALES_ALIAS,
-  LOCATION_HAS_MANY_SUB_SALES_FK,
+  LOCATION_HAS_MANY_SALES_ALIAS,
+  LOCATION_HAS_MANY_SALES_FK,
   LOCATION_MODEL_NAME,
   LOCATION_TABLE_NAME,
   SALES_MODEL_NAME
@@ -16,13 +16,13 @@ const schemaAttributes = initAttributes({
   },
   city: {
     type: Sequelize.STRING,
-    unique: true,
   },
   state: {
     type: Sequelize.STRING,
   },
   postal_code: {
     type: Sequelize.STRING,
+    unique: true,
   },
   region: {
     type: Sequelize.STRING,
@@ -45,8 +45,9 @@ const locationsModel = (sequelize) => {
 
   locations.associate = (associationModels) => {
     locations.hasMany(associationModels[SALES_MODEL_NAME], {
-      foreignKey: LOCATION_HAS_MANY_SUB_SALES_FK,
-      as: LOCATION_HAS_MANY_SUB_SALES_ALIAS
+      foreignKey: LOCATION_HAS_MANY_SALES_FK,
+      as: LOCATION_HAS_MANY_SALES_ALIAS,
+      onDelete: 'CASCADE',
     })
   }
 

@@ -17,8 +17,8 @@ const schemaAttributes = initAttributes({
     defaultValue: Sequelize.UUIDV4,
     primaryKey: true
   },
-  name: {
-    type: Sequelize.DATE,
+  category_name: {
+    type: Sequelize.STRING,
     unique: true,
   },
 })
@@ -37,12 +37,14 @@ const categoriesModel = (sequelize, DataTypes) => {
   categories.associate = (associationModels) => {
     categories.hasMany(associationModels[SUB_CATEGORY_MODEL_NAME], {
       foreignKey: CATEGORY_HAS_MANY_SUB_CATEGORY_FK,
-      as: CATEGORY_HAS_MANY_SUB_CATEGORY_ALIAS
+      as: CATEGORY_HAS_MANY_SUB_CATEGORY_ALIAS,
+      onDelete: 'CASCADE',
     })
 
     categories.hasMany(associationModels[PRODUCT_MODEL_NAME], {
       foreignKey: CATEGORY_HAS_MANY_SUB_PRODUCT_FK,
-      as: CATEGORY_HAS_MANY_SUB_PRODUCT_ALIAS
+      as: CATEGORY_HAS_MANY_SUB_PRODUCT_ALIAS,
+      onDelete: 'CASCADE',
     })
   }
 

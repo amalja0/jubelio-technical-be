@@ -20,7 +20,7 @@ const schemaAttributes = initAttributes({
     defaultValue: Sequelize.UUIDV4,
     primaryKey: true
   },
-  name: {
+  product_name: {
     type: Sequelize.STRING,
     unique: true,
   },
@@ -56,12 +56,14 @@ const productsModel = (sequelize) => {
 
     products.hasMany(associationModels[SALES_MODEL_NAME], {
       foreignKey: PRODUCT_HAS_MANY_SALES_FK,
-      as: PRODUCT_HAS_MANY_SALES_ALIAS
+      as: PRODUCT_HAS_MANY_SALES_ALIAS,
+      onDelete: 'CASCADE',
     })
 
     products.hasMany(associationModels[INVENTORY_MOVEMENT_MODEL_NAME], {
       foreignKey: PRODUCT_HAS_MANY_INVENTORY_MOVEMENT_FK,
-      as: PRODUCT_HAS_MANY_INVENTORY_MOVEMENT_ALIAS
+      as: PRODUCT_HAS_MANY_INVENTORY_MOVEMENT_ALIAS,
+      onDelete: 'CASCADE',
     })
   }
 

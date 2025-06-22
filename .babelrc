@@ -4,7 +4,6 @@
       "node": true
     }
   }]],
-  "plugins": ["transform-object-rest-spread"],
   "env": {
     "debug": {
       "sourceMaps": "inline",

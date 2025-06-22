@@ -4,7 +4,7 @@ export const initOptions = (additionalOptions) => {
   return {
     ...additionalOptions,
     timestamps: true,
-    paranoid: true,
+    paranoid: false,
     underscored: true,
     createdAt: 'created_at',
     updatedAt: 'updated_at',

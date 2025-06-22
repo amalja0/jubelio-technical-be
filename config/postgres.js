@@ -1,8 +1,8 @@
-require('babel-core/register');
+import '@babel/register';
 
-const config = require('.');
+import config from './index.js';
 
-module.exports = {
+export default {
   development: {
     username: config.dbUsername,
     password: config.dbPassword,

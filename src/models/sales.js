@@ -12,7 +12,6 @@ import {
   SALES_BELONGS_TO_SEGMENT_FK,
   SALES_HAS_MANY_INVENTORY_MOVEMENT_ALIAS,
   SALES_HAS_MANY_INVENTORY_MOVEMENT_FK,
-  SALES_HAS_MANY_INVENTORY_MOVEMENT_SOURCE_KEY,
   SALES_MODEL_NAME,
   SALES_TABLE_NAME,
   SEGMENT_MODEL_NAME
@@ -51,17 +50,12 @@ const schemaAttributes = initAttributes({
   },
   profit_ratio: {
     type: Sequelize.FLOAT,
-    validate: {
-      min: 0,
-      max: 1
-    }
   },
   number_of_record: {
     type: Sequelize.SMALLINT,
   },
   order_id: {
-    type: Sequelize.STRING,
-    unique: true
+    type: Sequelize.STRING
   },
   order_date: {
     type: Sequelize.DATE,
@@ -96,9 +90,9 @@ const salesModel = (sequelize) => {
     })
 
     sales.hasMany(associationModels[INVENTORY_MOVEMENT_MODEL_NAME], {
-      sourceKey: SALES_HAS_MANY_INVENTORY_MOVEMENT_SOURCE_KEY,
       foreignKey: SALES_HAS_MANY_INVENTORY_MOVEMENT_FK,
-      as: SALES_HAS_MANY_INVENTORY_MOVEMENT_ALIAS
+      as: SALES_HAS_MANY_INVENTORY_MOVEMENT_ALIAS,
+      onDelete: 'CASCADE',
     })
   }
 

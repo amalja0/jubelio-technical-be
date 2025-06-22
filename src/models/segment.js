@@ -2,8 +2,8 @@ import Sequelize from "sequelize";
 import {initAttributes, initOptions} from "./models.meta.js";
 import {
   SALES_MODEL_NAME,
-  SEGMENT_HAS_MANY_SUB_SALES_ALIAS,
-  SEGMENT_HAS_MANY_SUB_SALES_FK,
+  SEGMENT_HAS_MANY_SALES_ALIAS,
+  SEGMENT_HAS_MANY_SALES_FK,
   SEGMENT_MODEL_NAME,
   SEGMENT_TABLE_NAME
 } from "./models.constants.js";
@@ -14,8 +14,8 @@ const schemaAttributes = initAttributes({
     defaultValue: Sequelize.UUIDV4,
     primaryKey: true
   },
-  name: {
-    type: Sequelize.DATE,
+  segment_name: {
+    type: Sequelize.STRING,
     unique: true,
   }
 })
@@ -33,8 +33,9 @@ const segmentsModel = (sequelize) => {
 
   segments.associate = (associationModels) => {
     segments.hasMany(associationModels[SALES_MODEL_NAME], {
-      foreignKey: SEGMENT_HAS_MANY_SUB_SALES_FK,
-      as: SEGMENT_HAS_MANY_SUB_SALES_ALIAS
+      foreignKey: SEGMENT_HAS_MANY_SALES_FK,
+      as: SEGMENT_HAS_MANY_SALES_ALIAS,
+      onDelete: 'CASCADE',
     })
   }
 

@@ -1,5 +1,7 @@
-const path = require('path');
-require('dotenv').config();
+import dotenv from 'dotenv';
+
+// Load environment variables
+dotenv.config();
 
 const config = {
   host: process.env.HOST || '127.0.0.1',
@@ -11,5 +13,4 @@ const config = {
   dbName: process.env.DB_NAME || 'sales_analytics',
   dialect: 'postgres',
 }
-
-module.exports = config;
+export default config;

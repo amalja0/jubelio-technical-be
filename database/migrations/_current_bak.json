@@ -44,6 +44,10 @@
                     "allowNull": false,
                     "field": "updated_at",
                     "seqType": "Sequelize.DATE"
+                },
+                "deleted_at": {
+                    "field": "deleted_at",
+                    "seqType": "Sequelize.DATE"
                 }
             },
             "indexes": []
@@ -102,6 +106,10 @@
                 "updated_at": {
                     "allowNull": false,
                     "field": "updated_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "deleted_at": {
+                    "field": "deleted_at",
                     "seqType": "Sequelize.DATE"
                 },
                 "product_id": {
@@ -189,6 +197,10 @@
                     "allowNull": false,
                     "field": "updated_at",
                     "seqType": "Sequelize.DATE"
+                },
+                "deleted_at": {
+                    "field": "deleted_at",
+                    "seqType": "Sequelize.DATE"
                 }
             },
             "indexes": []
@@ -244,6 +256,10 @@
                 "updated_at": {
                     "allowNull": false,
                     "field": "updated_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "deleted_at": {
+                    "field": "deleted_at",
                     "seqType": "Sequelize.DATE"
                 },
                 "category_id": {
@@ -355,6 +371,10 @@
                     "field": "updated_at",
                     "seqType": "Sequelize.DATE"
                 },
+                "deleted_at": {
+                    "field": "deleted_at",
+                    "seqType": "Sequelize.DATE"
+                },
                 "location_id": {
                     "allowNull": true,
                     "references": {
@@ -435,6 +455,10 @@
                     "allowNull": false,
                     "field": "updated_at",
                     "seqType": "Sequelize.DATE"
+                },
+                "deleted_at": {
+                    "field": "deleted_at",
+                    "seqType": "Sequelize.DATE"
                 }
             },
             "indexes": []
@@ -484,6 +508,10 @@
                     "field": "updated_at",
                     "seqType": "Sequelize.DATE"
                 },
+                "deleted_at": {
+                    "field": "deleted_at",
+                    "seqType": "Sequelize.DATE"
+                },
                 "category_id": {
                     "allowNull": true,
                     "references": {
@@ -499,5 +527,5 @@
             "indexes": []
         }
     },
-    "revision": 3
+    "revision": 2
 }

@@ -9,16 +9,16 @@ var Sequelize = require('sequelize');
  * createTable "locations", deps: []
  * createTable "segments", deps: []
  * createTable "sub_categories", deps: [categories]
- * createTable "products", deps: [categories, categories, sub_categories]
- * createTable "sales", deps: [locations, products, locations, segments]
- * createTable "inventory_movement", deps: [products, products, sales]
+ * createTable "products", deps: [categories, sub_categories]
+ * createTable "sales", deps: [locations, products, segments]
+ * createTable "inventory_movement", deps: [products, sales]
  *
  **/
 
 var info = {
     "revision": 1,
     "name": "initial-migrations",
-    "created": "2025-06-19T01:45:52.484Z",
+    "created": "2025-06-21T15:41:30.574Z",
     "comment": ""
 };
 
@@ -34,9 +34,9 @@ var migrationCommands = function(transaction) {
                         "primaryKey": true,
                         "defaultValue": Sequelize.UUIDV4
                     },
-                    "name": {
-                        "type": Sequelize.DATE,
-                        "field": "name",
+                    "category_name": {
+                        "type": Sequelize.STRING,
+                        "field": "category_name",
                         "unique": true
                     },
                     "created_by": {
@@ -86,8 +86,7 @@ var migrationCommands = function(transaction) {
                     },
                     "city": {
                         "type": Sequelize.STRING,
-                        "field": "city",
-                        "unique": true
+                        "field": "city"
                     },
                     "state": {
                         "type": Sequelize.STRING,
@@ -95,7 +94,8 @@ var migrationCommands = function(transaction) {
                     },
                     "postal_code": {
                         "type": Sequelize.STRING,
-                        "field": "postal_code"
+                        "field": "postal_code",
+                        "unique": true
                     },
                     "region": {
                         "type": Sequelize.STRING,
@@ -150,9 +150,9 @@ var migrationCommands = function(transaction) {
                         "primaryKey": true,
                         "defaultValue": Sequelize.UUIDV4
                     },
-                    "name": {
-                        "type": Sequelize.DATE,
-                        "field": "name",
+                    "segment_name": {
+                        "type": Sequelize.STRING,
+                        "field": "segment_name",
                         "unique": true
                     },
                     "created_by": {
@@ -196,20 +196,13 @@ var migrationCommands = function(transaction) {
                 {
                     "id": {
                         "type": Sequelize.UUID,
-                        "onUpdate": "CASCADE",
-                        "onDelete": "CASCADE",
-                        "references": {
-                            "model": "categories",
-                            "key": "id"
-                        },
-                        "allowNull": true,
                         "field": "id",
                         "primaryKey": true,
                         "defaultValue": Sequelize.UUIDV4
                     },
-                    "name": {
-                        "type": Sequelize.DATE,
-                        "field": "name",
+                    "sub_category_name": {
+                        "type": Sequelize.STRING,
+                        "field": "sub_category_name",
                         "unique": true
                     },
                     "created_by": {
@@ -239,6 +232,17 @@ var migrationCommands = function(transaction) {
                     "deleted_at": {
                         "type": Sequelize.DATE,
                         "field": "deleted_at"
+                    },
+                    "category_id": {
+                        "type": Sequelize.UUID,
+                        "field": "category_id",
+                        "onUpdate": "CASCADE",
+                        "onDelete": "SET NULL",
+                        "references": {
+                            "model": "categories",
+                            "key": "id"
+                        },
+                        "allowNull": true
                     }
                 },
                 {
@@ -253,20 +257,13 @@ var migrationCommands = function(transaction) {
                 {
                     "id": {
                         "type": Sequelize.UUID,
-                        "onUpdate": "CASCADE",
-                        "onDelete": "CASCADE",
-                        "references": {
-                            "model": "categories",
-                            "key": "id"
-                        },
-                        "allowNull": true,
                         "field": "id",
                         "primaryKey": true,
                         "defaultValue": Sequelize.UUIDV4
                     },
-                    "name": {
+                    "product_name": {
                         "type": Sequelize.STRING,
-                        "field": "name",
+                        "field": "product_name",
                         "unique": true
                     },
                     "manufacturer": {
@@ -340,13 +337,6 @@ var migrationCommands = function(transaction) {
                 {
                     "id": {
                         "type": Sequelize.UUID,
-                        "onUpdate": "CASCADE",
-                        "onDelete": "CASCADE",
-                        "references": {
-                            "model": "locations",
-                            "key": "id"
-                        },
-                        "allowNull": true,
                         "field": "id",
                         "primaryKey": true,
                         "defaultValue": Sequelize.UUIDV4
@@ -389,8 +379,7 @@ var migrationCommands = function(transaction) {
                     },
                     "order_id": {
                         "type": Sequelize.STRING,
-                        "field": "order_id",
-                        "unique": true
+                        "field": "order_id"
                     },
                     "order_date": {
                         "type": Sequelize.DATE,
@@ -424,17 +413,6 @@ var migrationCommands = function(transaction) {
                         "type": Sequelize.DATE,
                         "field": "deleted_at"
                     },
-                    "product_id": {
-                        "type": Sequelize.UUID,
-                        "field": "product_id",
-                        "onUpdate": "CASCADE",
-                        "onDelete": "SET NULL",
-                        "references": {
-                            "model": "products",
-                            "key": "id"
-                        },
-                        "allowNull": true
-                    },
                     "location_id": {
                         "type": Sequelize.UUID,
                         "field": "location_id",
@@ -442,6 +420,17 @@ var migrationCommands = function(transaction) {
                         "onDelete": "SET NULL",
                         "references": {
                             "model": "locations",
+                            "key": "id"
+                        },
+                        "allowNull": true
+                    },
+                    "product_id": {
+                        "type": Sequelize.UUID,
+                        "field": "product_id",
+                        "onUpdate": "CASCADE",
+                        "onDelete": "SET NULL",
+                        "references": {
+                            "model": "products",
                             "key": "id"
                         },
                         "allowNull": true
@@ -470,13 +459,6 @@ var migrationCommands = function(transaction) {
                 {
                     "id": {
                         "type": Sequelize.UUID,
-                        "onUpdate": "CASCADE",
-                        "onDelete": "CASCADE",
-                        "references": {
-                            "model": "products",
-                            "key": "id"
-                        },
-                        "allowNull": true,
                         "field": "id",
                         "primaryKey": true,
                         "defaultValue": Sequelize.UUIDV4
@@ -536,14 +518,14 @@ var migrationCommands = function(transaction) {
                         },
                         "allowNull": true
                     },
-                    "sales_Id": {
-                        "type": Sequelize.STRING,
-                        "field": "sales__id",
+                    "sales_id": {
+                        "type": Sequelize.UUID,
+                        "field": "sales_id",
                         "onUpdate": "CASCADE",
                         "onDelete": "SET NULL",
                         "references": {
                             "model": "sales",
-                            "key": "order_id"
+                            "key": "id"
                         },
                         "allowNull": true
                     }
