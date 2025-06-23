@@ -31,6 +31,8 @@ const EtlProcessor = async () => {
       rowCount,
       file: filePath
     });
+
+    process.exit(0);
   } catch (error) {
     console.log(error)
     // Send error to main thread
@@ -39,6 +41,8 @@ const EtlProcessor = async () => {
       error: error.message,
       stack: error.stack
     });
+  } finally {
+    process.exit();
   }
 }
 

@@ -71,6 +71,14 @@ const EtlService = ( models ) => {
         try {
           await processMasterData(rows);
 
+          const isSalesDataAvailable = (await salesService.getAll()).length > 0;
+          const isInventoryMovementDataAvailable = (await inventoryMovementsService.getAll()).length > 0;
+          if (isSalesDataAvailable || isInventoryMovementDataAvailable) {
+            process.stdout.write(`\rDelete Existing Sales Data`);
+            await salesService.truncate();
+            process.stdout.write(`\rDelete Existing Inventory Movement Data`);
+            await inventoryMovementsService.truncate();
+          }
           for (const [index, batch] of batches.entries()) {
             process.stdout.write(`\rExecuting batch ${index + 1} of ${batches.length}`);
             await flushBatch(batch);
@@ -212,6 +220,7 @@ const EtlService = ( models ) => {
       const isMasterDataExists = isCategoryDataExists || isSubCategoryDataExists || isLocationDataExists || isProductDataExists || isSegmentDataExists;
 
       if (isMasterDataExists) {
+        process.stdout.write(`\rDelete Existing Master Data`);
         await categoriesService.truncate();
         await subCategoriesService.truncate();
         await locationsService.truncate();
@@ -220,12 +229,14 @@ const EtlService = ( models ) => {
       }
 
       await sequelize.transaction(async() => {
+        process.stdout.write(`\rCreating Master Data of Categories`);
         const categories = await categoriesService.bulkCreate(uniqueCategoryNames);
 
         categories?.forEach((category) => {
           categoryMap.set(category.category_name, category.id);
         });
 
+        process.stdout.write(`\rCreating Master Data of Sub Categories`);
         const formattedUniqueSubCategory = uniqueSubCategoryNames.map((item) => ({
           category_id: categories.find(({ category_name }) => category_name === item.category_name)?.id,
           sub_category_name: item.sub_category_name,
@@ -237,11 +248,13 @@ const EtlService = ( models ) => {
           subCategoryMap.set(subCategory.sub_category_name, subCategory.id);
         });
 
+        process.stdout.write(`\rCreating Master Data of Locations`);
         (await locationsService.bulkCreate(uniqueLocationsPostalCode))
           .forEach((location) => {
             locationMap.set(location.postal_code, location.id);
           });
 
+        process.stdout.write(`\rCreating Master Data of Products`);
         const formattedUniqueProducts = uniqueProductNames.map((item) => ({
           category_id: categories.find(({ category_name }) => category_name === item.category_name)?.id,
           sub_category_id: subCategories.find(({ sub_category_name }) => sub_category_name === item.sub_category_name),
@@ -255,6 +268,7 @@ const EtlService = ( models ) => {
             productMap.set(product.product_name, product.id)
           });
 
+        process.stdout.write(`\rCreating Master Data of Segments`);
         (await segmentsService.bulkCreate(uniqueSegmentNames))
           ?.forEach((segment) => {
             segmentMap.set(segment.segment_name, segment.id);
@@ -267,6 +281,7 @@ const EtlService = ( models ) => {
           products: productMap,
           segments: segmentMap,
         }
+        process.stdout.write(`\rMaster Data Creations Done`);
       })
     } catch (err) {
       throw err;

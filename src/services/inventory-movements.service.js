@@ -13,9 +13,14 @@ const InventoryMovementsService = (models) => {
     return inventoryMovement;
   }
 
+  const truncate = async () => {
+    await InventoryMovement.destroy({ truncate: { cascade: true } });
+  }
+
   return {
     getAll,
-    create
+    create,
+    truncate,
   }
 }
 

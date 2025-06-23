@@ -54,19 +54,6 @@ const initSequelize = async ({
     }
   }
 
-  // Dynamically add model into db object
-  // fs.readdirSync(modelDir.dirname)
-  //   .filter(file => (file.indexOf('.') !== 0)
-  //     && (file !== modelDir.basename)
-  //     && (file.slice(-3) === '.js'))
-  //   .filter(file => !excludeFiles.includes(file))
-  //   .forEach((file) => {
-  //     const modelPath = path.join(modelDir.dirname, file);
-  //     const modelDef = import(modelPath);
-  //     const model = modelDef.default(sequelize, Sequelize.DataTypes);
-  //     db[model.name] = model;
-  //   });
-
   Object.keys(db).map((modelName) => {
     // load model associations
     if (db[modelName].associate) db[modelName].associate(db);

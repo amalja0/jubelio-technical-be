@@ -1,15 +1,33 @@
-import db from './models'
+import express from "express";
+import cors from "cors";
+import analyticsReportingRoute from "./routes/analytics-reporting.route.js";
+import {getDB, initializeDB} from "./models/index.js";
 
-const db = await db.sequelize;
+const app = express();
 
-// Test the connection
-db.sequelize.authenticate()
-  .then(() => console.log('Database connected!'))
-  .catch(err => console.error('Connection error:', err));
+async function startServer() {
+  try {
+    const db = await initializeDB();
+    await getDB().sequelize.authenticate();
 
-// Sync models (only in development)
-if (process.env.NODE_ENV === 'development') {
-  db.sequelize.sync({ alter: true })
-    .then(() => console.log('Database synced'))
-    .catch(err => console.error('Sync error:', err));
+    app.locals.db = db;
+
+    app.use(cors())
+    app.use(express.json());
+    app.use(express.urlencoded({ extended: true }));
+
+    const analyticsRouter = analyticsReportingRoute();
+
+    app.use('/api', analyticsRouter);
+
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    })
+  } catch (err) {
+    console.error('Initialization error:', err);
+    process.exit(1);
+  }
 }
+
+startServer();

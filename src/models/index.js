@@ -17,15 +17,6 @@ export async function initializeDB() {
     try {
       await db.sequelize.authenticate();
       console.log('Database connection established successfully')
-
-      const pool = db.sequelize.connectionManager.pool;
-      // setInterval(() => {
-      //   console.log(`Connection Pool Status:
-      //   Total: ${pool.size}
-      //   In Use: ${pool.using}
-      //   Available: ${pool.available}
-      //   Waiting Requests: ${pool.waiting}`);
-      // }, 500)
     } catch (error) {
       console.error('Unable to connect to the database:', error);
       throw error;
