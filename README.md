@@ -1,8 +1,8 @@
-# Jubelio Technical Assessment – Frontend
+# Jubelio Technical Assessment – Backend
 
-This repository serves as the **frontend project** for a **Fullstack Developer Technical Assessment** at **Jubelio**.
+This repository serves as the **backend project** for a **Fullstack Developer Technical Assessment** at **Jubelio**.
 
-Built using **Vite** and **React**, this project demonstrates frontend development skills, component structuring, and integration readiness with backend services.
+Built using **Express** and **Sequelize**, this project demonstrates backend development skills, component structuring, and integration readiness with frontend services.
 
 ## 🛠️ Technologies Used
 
